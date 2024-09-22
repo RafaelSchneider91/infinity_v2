@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exercícios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Exercícios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let exercicio of exercicios">
+      {{ exercicio.nome }} <!-- Supondo que cada exercício tenha uma propriedade 'nome' -->
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="adicionarExercicio()">
+    Adicionar Novo Exercício
+  </ion-button>
+</ion-content>

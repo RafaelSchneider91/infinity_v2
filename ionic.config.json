@@ -1,0 +1,10 @@
+{
+  "name": "infinity",
+  "type": "angular",
+  "proxy": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:3001/api"
+    }
+  ]
+}
