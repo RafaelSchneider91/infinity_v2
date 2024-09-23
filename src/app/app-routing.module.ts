@@ -2,45 +2,77 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
-  {
-    path: 'homeusuario',
-    loadChildren: () => import('./pages/homeusuario/homeusuario.module').then( m => m.HomeusuarioPageModule)
-  },
+  // {
+  //   path: 'homeusuario',
+  //   loadChildren: () =>
+  //     import('./pages/homeusuario/homeusuario.module').then(
+  //       (m) => m.HomeusuarioPageModule
+  //     ),
+  // },
   {
     path: 'instrutor',
-    loadChildren: () => import('./pages/instrutor/instrutor.module').then( m => m.InstrutorPageModule)
+    loadChildren: () =>
+      import('./pages/instrutor/instrutor.module').then(
+        (m) => m.InstrutorPageModule
+      ),
   },
   {
     path: 'exercicios',
-    loadChildren: () => import('./pages/instrutor/exercicios/exercicios/exercicios.module').then( m => m.ExerciciosPageModule)
+    loadChildren: () =>
+      import('./pages/instrutor/exercicios/exercicios.module').then(
+        (m) => m.ExerciciosPageModule
+      ),
+  },
+  {
+    path: 'criarexercicio',
+    loadChildren: () =>
+      import(
+        './pages/instrutor/exercicios/criarexercicio/criarexercicio.module'
+      ).then((m) => m.CriarexercicioPageModule),
   },
   {
     path: 'aluno',
-    loadChildren: () => import('./pages/aluno/aluno.module').then( m => m.UsuarioPageModule)
+    loadChildren: () =>
+      import('./pages/aluno/aluno.module').then((m) => m.UsuarioPageModule),
   },
 
   {
     path: 'cadastro-aluno',
-    loadChildren: () => import('./pages/aluno/cadastro-aluno/cadastro-aluno/cadastro-aluno.module').then( m => m.CadastroAlunoPageModule)
+    loadChildren: () =>
+      import(
+        './pages/aluno/cadastro-aluno/cadastro-aluno/cadastro-aluno.module'
+      ).then((m) => m.CadastroAlunoPageModule),
   },
 
+  {
+    path: 'detalhes-aluno/:id',
+    loadChildren: () =>
+      import(
+        './pages/instrutor/detalharaluno/detalharaluno.module'
+      ).then((m) => m.DetalharalunoPageModule),
+  },
+  {
+    path: 'definir-exercicios',
+    loadChildren: () => import('./pages/instrutor/aluno/definirexercicios/definirexercicios-routing.module').then(m => m.DefinirexerciciosPageRoutingModule)
+  }
+  
   
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Aluno } from '../../models/aluno.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,11 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class AlunoService {
   private apiUrl = 'http://localhost:3001/api/usuariofinal';  // URL da API
 
-  private alunos: Aluno[] = [];
-
   constructor(private http: HttpClient){}
 
+ 
    // Função para buscar todos os usuários cadastrados
   getUsuarios(): Observable<any[]> {
-    
     return this.http.get<any[]>(this.apiUrl);
   }
 
@@ -38,7 +36,12 @@ export class AlunoService {
   }
 
 
-  listarAlunos() {
-    // Retornar lista de alunos cadastrados
-  }
+  adicionarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${alunoId}/exercicios`, { dia, exercicios });
+}
+
+
+  
+
+
 }

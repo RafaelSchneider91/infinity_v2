@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/instrutor"></ion-back-button>
     </ion-buttons>
     <ion-title>Exercícios</ion-title>
   </ion-toolbar>
@@ -15,12 +15,12 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let exercicio of exercicios">
+    <ion-item *ngFor="let exercicio of exercicios" (click)="openModal(exercicio)">
       {{ exercicio.nome }} <!-- Supondo que cada exercício tenha uma propriedade 'nome' -->
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="adicionarExercicio()">
+  <!-- <ion-button expand="full" [routerLink]="['/criarexercicio']">
     Adicionar Novo Exercício
-  </ion-button>
+  </ion-button> -->
 </ion-content>

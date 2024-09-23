@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalhes do Exercício</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nome do Exercício:</ion-label>
+      <ion-text>{{ exercicio.nome }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descanso (seg):</ion-label>
+      <ion-text>{{ exercicio.descanso }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Repetições:</ion-label>
+      <ion-text>{{ exercicio.repeticoes }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Séries:</ion-label>
+      <ion-text>{{ exercicio.series }}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

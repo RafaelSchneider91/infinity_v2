@@ -12,9 +12,25 @@ export class InstrutorService {
 
   constructor(private http: HttpClient){}
 
+  // Função para tratar erros
+  private handleError(error: any) {
+    console.error('Erro na API', error);
+    return throwError(() => new Error('Erro ao conectar com a API'));
+  }
+
   // Função para buscar todos os exercicios cadastrados
   listarExercicios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrlExercicios);
+  }
+  
+
+  // Função para adicionar um novo exercício
+  adicionarExercicio(exercicio: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(this.apiUrlExercicios, exercicio, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // Funcao para adicionar um novo instrutor

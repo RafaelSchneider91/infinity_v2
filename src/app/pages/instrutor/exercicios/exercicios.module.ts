@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ExerciciosPageRoutingModule } from './exercicios-routing.module';
-
+import { DetalharexercicioComponent } from './detalharexercicio/detalharexercicio.component';
 import { ExerciciosPage } from './exercicios.page';
 
 @NgModule({
@@ -13,8 +13,10 @@ import { ExerciciosPage } from './exercicios.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ExerciciosPageRoutingModule
+    ExerciciosPageRoutingModule,
   ],
-  declarations: [ExerciciosPage]
+  declarations: [ExerciciosPage, DetalharexercicioComponent ],
+
+  // entryComponents: [DetalharexercicioComponent]
 })
 export class ExerciciosPageModule {}

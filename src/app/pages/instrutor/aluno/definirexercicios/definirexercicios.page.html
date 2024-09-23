@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Definir Exercícios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Lista de exercícios com checkbox para seleção -->
+    <ion-item *ngFor="let exercicio of exercicios">
+      <ion-checkbox slot="start" [(ngModel)]="exercicio.selecionado"></ion-checkbox>
+      {{ exercicio.nome }} <!-- Exibir o nome de cada exercício -->
+    </ion-item>
+  </ion-list>
+
+  <!-- Botão para salvar os exercícios selecionados -->
+  <ion-button expand="full" (click)="salvarExercicios()">
+    Salvar Exercícios
+  </ion-button>
+</ion-content>

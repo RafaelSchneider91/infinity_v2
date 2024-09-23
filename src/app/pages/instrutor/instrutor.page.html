@@ -7,6 +7,11 @@
   <ion-content class="ion-padding">
     <ion-list>
       <ion-item [routerLink]="['/exercicios']">
+        Exibir Exercícios
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item [routerLink]="['/criarexercicio']">
         Cadastrar Exercício
       </ion-item>
     </ion-list>
@@ -23,6 +28,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    Pagina do Instrutor
+    <ion-list>
+      <h1>Alunos</h1>
+      <ion-item *ngFor="let aluno of alunos" (click)="exibirDetalhesAluno(aluno)">
+        {{ aluno.nome }} <!-- Supondo que 'nome' seja uma propriedade no objeto aluno -->
+      </ion-item>
+    </ion-list>
   </ion-content>
 </div>
