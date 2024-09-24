@@ -1,23 +1,28 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Definir Exercícios</ion-title>
+    <ion-title>Definir Exercicios do Aluno</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-list>
-    <!-- Lista de exercícios com checkbox para seleção -->
-    <ion-item *ngFor="let exercicio of exercicios">
-      <ion-checkbox slot="start" [(ngModel)]="exercicio.selecionado"></ion-checkbox>
-      {{ exercicio.nome }} <!-- Exibir o nome de cada exercício -->
-    </ion-item>
-  </ion-list>
+  <h2>Exercícios para {{ dia }}</h2>
+  
+  <ng-container *ngIf="exercicios.length > 0; else noExercises">
+    <ion-list>
+      <ion-item *ngFor="let exercicio of exercicios">
+        <ion-label>
+          <h3>{{ exercicio.nome }}</h3>
+        </ion-label>
+        <ion-checkbox [(ngModel)]="exercicio.selecionado"></ion-checkbox>
+      </ion-item>
+    </ion-list>
 
-  <!-- Botão para salvar os exercícios selecionados -->
-  <ion-button expand="full" (click)="salvarExercicios()">
-    Salvar Exercícios
-  </ion-button>
+    <ion-button expand="full" (click)="atualizarExercicio()">Definir Exercícios</ion-button>
+  </ng-container>
+  
+  <ng-template #noExercises>
+    <p>Nenhum exercício disponível.</p>
+  </ng-template>
 </ion-content>

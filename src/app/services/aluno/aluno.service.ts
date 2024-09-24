@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Aluno } from '../../models/aluno.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,18 @@ export class AlunoService {
   getUsuarios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+
+   // Função para buscar aluno por ID
+   getAlunoById(alunoId: string) {
+    return this.http.get(`${this.apiUrl}/${alunoId}`);
+  }
+
+  // Função para buscar os exercícios de um aluno por ID e dia
+  getExerciciosPorDia(alunoId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${alunoId}/exercicios`).pipe(
+        tap(response => console.log('Resposta da API:', response)) // Log da resposta
+    );
+}
 
   // Função para cadastrar o aluno via POST
   cadastrarAluno(aluno: Aluno): Observable<any> {
@@ -36,9 +48,24 @@ export class AlunoService {
   }
 
 
-  adicionarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
+adicionarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
     return this.http.post(`${this.apiUrl}/${alunoId}/exercicios`, { dia, exercicios });
 }
+
+
+atualizarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
+  const body = {
+      exercicios: {
+          [dia]: exercicios // Cria uma propriedade do dia com a lista de exercícios
+      }
+  };
+
+  console.log(body)
+  return this.http.put(`${this.apiUrl}/${alunoId}`, body); // Utilize PUT para atualizar
+}
+
+
+
 
 
   

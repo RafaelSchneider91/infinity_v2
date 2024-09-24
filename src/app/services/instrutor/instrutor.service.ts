@@ -18,6 +18,8 @@ export class InstrutorService {
     return throwError(() => new Error('Erro ao conectar com a API'));
   }
 
+  
+
   // Função para buscar todos os exercicios cadastrados
   listarExercicios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrlExercicios);
@@ -28,6 +30,15 @@ export class InstrutorService {
   adicionarExercicio(exercicio: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrlExercicios, exercicio, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Função para atualizar um exercício
+  atualizarExercicio(exercicioId: string, exercicio: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<any>(`${this.apiUrlExercicios}/${exercicioId}`, exercicio, { headers })
       .pipe(
         catchError(this.handleError)
       );
