@@ -60,7 +60,7 @@ atualizarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable
       }
   };
 
-  console.log(body)
+  // console.log(body)
   return this.http.put(`${this.apiUrl}/${alunoId}`, body); // Utilize PUT para atualizar
 }
 

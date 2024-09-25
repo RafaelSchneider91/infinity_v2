@@ -14,6 +14,8 @@ export class DefinirExerciciosPage implements OnInit {
   dia: string = '';
   alunoData: any;
   exercicios: any[] = []; // Array para armazenar os exercícios
+  exerciciosusuario: any[] = []
+
 
   constructor(
     private route: ActivatedRoute,
@@ -37,42 +39,13 @@ export class DefinirExerciciosPage implements OnInit {
     this.carregarExercicios();
   }
 
-//   carregarExercicios() {
-//     this.instrutorService.listarExercicios().subscribe(
-//       (data) => {
-//         this.exercicios = data; // Armazena os exercícios recebidos
-//         console.log(this.exercicios)
-//       },
-//       (error) => {
-//         console.error('Erro ao carregar exercícios:', error);
-//       }
-//     );
-//   }
 
-//   buscarDadosAluno(alunoId: string) {
-//     this.alunoService.getExerciciosPorDia(alunoId).subscribe(
-//       (response: any) => { // Usando 'any' para a resposta
-//         this.alunoData = response.data; // Acesse 'data' diretamente
-
-//         // Verifique se 'exercicios' e o 'dia' existem
-//         if (this.alunoData?.exercicios && this.alunoData.exercicios[this.dia]) {
-//           const exerciciosDia = this.alunoData.exercicios[this.dia]; // Sem tipagem
-//           console.log('Exercícios para o dia:', exerciciosDia);
-//         } else {
-//           console.error(`Nenhum exercício encontrado para o dia: ${this.dia}`);
-//         }
-//       },
-//       error => {
-//         console.error('Erro ao buscar dados do aluno:', error);
-//       }
-//     );
-// }
 
 carregarExercicios() {
   this.instrutorService.listarExercicios().subscribe(
     (data) => {
       this.exercicios = data; // Armazena os exercícios recebidos
-      console.log('Todos os exercícios:', this.exercicios);
+      // console.log('Todos os exercícios:', this.exercicios);
 
       // Após carregar os exercícios, buscar os dados do aluno
       this.buscarDadosAluno(this.alunoId); // Substitua 'ALUNO_ID_AQUI' pelo ID real do aluno
@@ -108,40 +81,25 @@ buscarDadosAluno(alunoId: string) {
 }
 
 
-
-// adicionarExercicio() {
-//   const exerciciosSelecionados = this.exercicios.filter(exercicio => exercicio.selecionado);
-  
-//   if (exerciciosSelecionados.length > 0) {
-//     this.alunoService.adicionarExercicios(this.alunoId, this.dia, exerciciosSelecionados).subscribe(
-//       (response) => {
-//         console.log('Exercícios adicionados com sucesso:', response);
-//       },
-//       (error) => {
-//         console.error('Erro ao adicionar exercícios:', error);
-//       }
-//     );
-//   } else {
-//     console.log('Nenhum exercício selecionado para adicionar.');
-//   }
-// }
-
 // Funcao para adicionar novos exercicios a um aluno
 atualizarExercicio() {
   // Filtra os exercícios selecionados
   const exerciciosSelecionados = this.exercicios.filter(exercicio => exercicio.selecionado);
   
-  console.log(exerciciosSelecionados);
+  const exerciciosDiaUsuario = this.alunoData.exercicios[this.dia];
+  console.log('Exercicios do usuario do dia: ' + exerciciosDiaUsuario.id)
 
   if (exerciciosSelecionados.length > 0) {
       // Atualiza os exercícios
+
+      console.log(this.exercicios)
       this.alunoService.adicionarExercicios(this.alunoId, this.dia, exerciciosSelecionados).subscribe(
-          (response) => {
-              console.log('Exercícios atualizados com sucesso:', response);
-          },
-          (error) => {
-              console.error('Erro ao atualizar exercícios:', error);
-          }
+      (response) => {
+          console.log('Exercícios atualizados com sucesso:', response);
+      },
+      (error) => {
+          console.error('Erro ao atualizar exercícios:', error);
+      }
       );
   } else {
       console.log('Nenhum exercício selecionado para atualizar.');

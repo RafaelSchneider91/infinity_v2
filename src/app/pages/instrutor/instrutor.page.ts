@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlunoService } from 'src/app/services/aluno/aluno.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
 
 @Component({
   selector: 'app-instrutor',
@@ -12,6 +14,7 @@ export class InstrutorPage implements OnInit {
 
   constructor(
     private alunoService: AlunoService, 
+    private authService: AuthService,
     private router: Router) {}
 
   ngOnInit() {
@@ -29,5 +32,14 @@ export class InstrutorPage implements OnInit {
     // Redirecionar para a página de detalhes do aluno
     // Passa o id do aluno pela URL para a página de detalhes
     this.router.navigate(['/detalhes-aluno', aluno.id]);
+  }
+
+  async logout() {
+    try {
+      await this.authService.logout();
+      console.log('Logout realizado com sucesso');
+    } catch (error) {
+      console.error('Erro ao realizar logout:', error);
+    }
   }
 }
