@@ -13,7 +13,7 @@ export class DefinirExerciciosPage implements OnInit {
   alunoId: string = '';
   dia: string = '';
   alunoData: any;
-  exercicios: any[] = []; // Array para armazenar os exercícios
+  exercicios: any[] = []; 
   exerciciosusuario: any[] = []
 
 
@@ -24,38 +24,23 @@ export class DefinirExerciciosPage implements OnInit {
 
   ) {}
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.dia = params.get('dia') || '';
-      this.alunoId = params.get('alunoId') || '';
-      
-      if (this.alunoId && this.dia) {
-        this.buscarDadosAluno(this.alunoId);
-      } else {
-        console.error('Aluno ID ou dia não fornecido.');
-      }
-    });
-
-    this.carregarExercicios();
-  }
-
-
-
-carregarExercicios() {
-  this.instrutorService.listarExercicios().subscribe(
-    (data) => {
-      this.exercicios = data; // Armazena os exercícios recebidos
-      // console.log('Todos os exercícios:', this.exercicios);
-
-      // Após carregar os exercícios, buscar os dados do aluno
-      this.buscarDadosAluno(this.alunoId); // Substitua 'ALUNO_ID_AQUI' pelo ID real do aluno
-    },
-    (error) => {
-      console.error('Erro ao carregar exercícios:', error);
+ngOnInit() {
+  this.route.paramMap.subscribe(params => {
+    this.dia = params.get('dia') || '';
+    this.alunoId = params.get('alunoId') || '';
+    
+    if (this.alunoId && this.dia) {
+      this.buscarDadosAluno(this.alunoId);
+    } else {
+      console.error('Aluno ID ou dia não fornecido.');
     }
-  );
+  });
+
+  this.carregarExercicios();
 }
 
+
+// busca os dados aluno com base no id
 buscarDadosAluno(alunoId: string) {
   this.alunoService.getExerciciosPorDia(alunoId).subscribe(
     (response: any) => { // Mantenha 'any' para a resposta
@@ -80,6 +65,20 @@ buscarDadosAluno(alunoId: string) {
   );
 }
 
+// Funcao para exibir os exercicios de um determinado aluno
+carregarExercicios() {
+  this.instrutorService.listarExercicios().subscribe(
+    (data) => {
+      this.exercicios = data; // Armazena os exercícios recebidos
+      // console.log('Todos os exercícios:', this.exercicios);
+      // Após carregar os exercícios, buscar os dados do aluno
+      this.buscarDadosAluno(this.alunoId);
+    },
+    (error) => {
+      console.error('Erro ao carregar exercícios:', error);
+    }
+  );
+}
 
 // Funcao para adicionar novos exercicios a um aluno
 atualizarExercicio() {
@@ -91,7 +90,6 @@ atualizarExercicio() {
 
   if (exerciciosSelecionados.length > 0) {
       // Atualiza os exercícios
-
       console.log(this.exercicios)
       this.alunoService.adicionarExercicios(this.alunoId, this.dia, exerciciosSelecionados).subscribe(
       (response) => {
