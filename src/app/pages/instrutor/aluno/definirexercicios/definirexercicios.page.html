@@ -18,11 +18,19 @@
         <ion-checkbox [(ngModel)]="exercicio.selecionado"></ion-checkbox>
       </ion-item>
     </ion-list>
-
+  
     <ion-button expand="full" (click)="atualizarExercicio()">Definir Exercícios</ion-button>
   </ng-container>
   
+  <!-- Template para quando não houver exercícios -->
   <ng-template #noExercises>
-    <p>Nenhum exercício disponível.</p>
+    <ion-list>
+      <ion-item *ngFor="let exercicio of exercicios">
+        <ion-label>
+          <h3>{{ exercicio.nome }}</h3>
+        </ion-label>
+        <!-- <ion-checkbox [(ngModel)]="exercicio.selecionado"></ion-checkbox> -->
+      </ion-item>
+    </ion-list>
   </ng-template>
 </ion-content>

@@ -57,16 +57,17 @@ const routes: Routes = [
   {
     path: 'detalhes-aluno/:id',
     loadChildren: () =>
-      import(
-        './pages/instrutor/detalharaluno/detalharaluno.module'
-      ).then((m) => m.DetalharalunoPageModule),
+      import('./pages/instrutor/aluno/detalharaluno/detalharaluno.module').then(
+        (m) => m.DetalharalunoPageModule
+      ),
   },
   {
     path: 'definir-exercicios',
-    loadChildren: () => import('./pages/instrutor/aluno/definirexercicios/definirexercicios-routing.module').then(m => m.DefinirexerciciosPageRoutingModule)
-  }
-  
-  
+    loadChildren: () =>
+      import(
+        './pages/instrutor/aluno/definirexercicios/definirexercicios-routing.module'
+      ).then((m) => m.DefinirexerciciosPageRoutingModule),
+  },
 ];
 
 @NgModule({

@@ -26,7 +26,7 @@ export class InstrutorService {
   }
   
 
-  // Função para adicionar um novo exercício
+  // Função para criar um novo exercício
   adicionarExercicio(exercicio: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrlExercicios, exercicio, { headers })
@@ -49,10 +49,6 @@ export class InstrutorService {
     // Lógica para salvar instrutor
   }
 
-  // Função para buscar todos os instrutores cadastrados
-  deletarInstrutor() {
-    // Retornar lista de instrutores
-  }
 
   
 }

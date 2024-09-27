@@ -18,14 +18,17 @@ const routes: Routes = [
   {
     path: 'detalharaluno',
     loadChildren: () =>
-      import('./detalharaluno/detalharaluno.module').then(
+      import('./aluno/detalharaluno/detalharaluno.module').then(
         (m) => m.DetalharalunoPageModule
       ),
-  },  {
-    path: 'definirexercicios',
-    loadChildren: () => import('./aluno/definirexercicios/definirexercicios.module').then( m => m.DefinirexerciciosPageModule)
   },
-
+  {
+    path: 'definirexercicios',
+    loadChildren: () =>
+      import('./aluno/definirexercicios/definirexercicios.module').then(
+        (m) => m.DefinirexerciciosPageModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -27,7 +27,7 @@ export class AlunoService {
     return this.http.get(`${this.apiUrl}/${alunoId}/exercicios`).pipe(
         tap(response => console.log('Resposta da API:', response)) // Log da resposta
     );
-}
+  }
 
   // Função para cadastrar o aluno via POST
   cadastrarAluno(aluno: Aluno): Observable<any> {
@@ -53,15 +53,19 @@ adicionarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable
 }
 
 
-atualizarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
-  const body = {
-      exercicios: {
-          [dia]: exercicios // Cria uma propriedade do dia com a lista de exercícios
-      }
-  };
+// atualizarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
+//   const body = {
+//       exercicios: {
+//           [dia]: exercicios // Cria uma propriedade do dia com a lista de exercícios
+//       }
+//   };
 
-  // console.log(body)
-  return this.http.put(`${this.apiUrl}/${alunoId}`, body); // Utilize PUT para atualizar
+//   // console.log(body)
+//   return this.http.put(`${this.apiUrl}/${alunoId}`, body); // Utilize PUT para atualizar
+// }
+
+atualizarExercicios(alunoId: string, dia: string, exercicios: any[]): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${alunoId}/exercicios`, { dia, exercicios });
 }
 
 
