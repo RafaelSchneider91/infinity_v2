@@ -16,59 +16,74 @@
     </ion-toolbar>
   </ion-header>
 
-  <div *ngIf="userData; else loading">
+  <div *ngIf="userData">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{ userData.data.nome }}</ion-card-title>
-        <ion-card-subtitle>{{ userData.data.email }}</ion-card-subtitle>
+        <ion-card-title>{{ userData.nome }}</ion-card-title>
+        <ion-card-subtitle>{{ userData.email }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Perfil:</strong> {{ userData.data.perfil }}</p>
-        <p><strong>Peso:</strong> {{ userData.data.peso }} kg</p>
-        <p><strong>Objetivo:</strong> {{ userData.data.objetivo }}</p>
-        <p><strong>Dias de Treino:</strong> {{ userData.data.diatreino?.join(', ') || 'Nenhum dia definido' }}</p>
-
+        <p><strong>Perfil:</strong> {{ userData.perfil }}</p>
+        <p><strong>Peso:</strong> {{ userData.peso }} kg</p>
+        <p><strong>Objetivo:</strong> {{ userData.objetivo }}</p>
+        <p>
+          <strong>Dias de Treino:</strong> {{ userData.diatreino?.join(', ') ||
+          'Nenhum dia definido' }}
+        </p>
       </ion-card-content>
     </ion-card>
-  </div>
-  <div *ngIf="userData">
-    <ion-list>
-      <ion-item>
-        <ion-label>Select Day</ion-label>
-        <ion-select [(ngModel)]="diaSelecionado" (ionChange)="onDayChange()">
-          <ion-select-option *ngFor="let dia of userData.diatreino" [value]="dia">{{ dia }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
 
-    <div *ngIf="exerciciosDoDia && exerciciosDoDia.length > 0">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Exercícios para {{ diaSelecionado }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let exercicio of exerciciosDoDia">
-              <ion-label>
-                <h2>{{ exercicio.nome }}</h2>
-                <p>Repetições: {{ exercicio.repeticoes }}</p>
-                <p>Séries: {{ exercicio.series }}</p>
-                <p>Descanso: {{ exercicio.descanso }} segundos</p>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
+    <!-- <div class="segment-scroll">
+      <ion-segment [(ngModel)]="diaSelecionado" (ionChange)="onDayChange()">
+        <ion-segment-button *ngFor="let dia of userData.diatreino" [value]="dia">
+          {{ dia }}
+        </ion-segment-button>
+      </ion-segment>
+    </div> -->
+    <ion-card *ngIf="userData.objetivo.length > 0">
+      <ion-card-header>
+        <ion-card-title>Selecione um dia</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+    <div class="segment-scroll">
+      <ion-segment [(ngModel)]="diaSelecionado" (ionChange)="onDayChange()">
+        <ion-segment-button
+          *ngFor="let dia of userData.diatreino"
+          [value]="dia"
+        >
+          {{ dia }}
+        </ion-segment-button>
+      </ion-segment>
     </div>
-    <div *ngIf="exerciciosDoDia && exerciciosDoDia.length === 0">
-      <p>Não há exercícios para o dia selecionado.</p>
-    </div>
+
+    <ion-card *ngIf="exerciciosDoDia.length > 0">
+      <!-- <ion-card-header>
+        <ion-card-title>Selecione um dia</ion-card-title>
+      </ion-card-header> -->
+      <ion-card-header>
+        <ion-card-title>Exercícios para {{ diaSelecionado }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let exercicio of exerciciosDoDia">
+            <ion-label>
+              <h3>{{ exercicio.nome }}</h3>
+              <p>
+                Intervalo/Descanso: {{ (exercicio.descanso / 60) |
+                number:'1.0-0' }} min
+              </p>
+              <p>Repetições: {{exercicio.repeticoes }}</p>
+              <p>Séries: {{ exercicio.series }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="userData.objetivo.length === 0">
+      <ion-card-header>
+        <ion-card-title>Voce não possui exercícios cadastrados</ion-card-title>
+      </ion-card-header>
+    </ion-card>
   </div>
-
-  
-
-  <ng-template #loading>
-    <ion-spinner name="crescent"></ion-spinner>
-    <p>Aguardando dados do usuário...</p>
-  </ng-template>
 </ion-content>

@@ -1,0 +1,21 @@
+.segment-scroll {
+    display: flex;
+    overflow-x: auto; // Permitir rolagem horizontal
+    padding: 10px 16px; // Padding para o container (16px nas laterais)
+    white-space: nowrap; // Impedir quebras de linha
+  }
+  
+  ion-segment {
+    display: flex; // Usar flexbox
+    flex-wrap: nowrap; // Impedir quebra de linha
+    min-width: max-content; // Ajustar a largura mínima para caber todos os botões
+  }
+  
+  ion-segment-button {
+    min-width: 80px; // Defina um tamanho mínimo para cada botão
+    white-space: nowrap; // Impedir quebra de texto nos botões
+    flex-shrink: 0; // Impedir que os botões encolham
+  }
+
+  
+  
